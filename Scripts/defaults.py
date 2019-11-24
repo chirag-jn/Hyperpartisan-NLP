@@ -1,14 +1,14 @@
 import pickle
 
 def loadPickle(filename):
-    filename = 'Models/' + filename
+    filename = 'Models/' + filename + pickle_ext
     file = open(filename, 'rb')
     model = pickle.load(file)
     file.close()
     return model
 
 def savePickle(model, filename):
-    filename = 'Models/' + filename
+    filename = 'Models/' + filename + pickle_ext
     file = open(filename, 'wb+')
     pickle.dump(model, file)
     file.close()

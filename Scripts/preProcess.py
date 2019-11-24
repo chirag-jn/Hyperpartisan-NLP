@@ -75,6 +75,7 @@ def getGroundTruth():
         else:
             is_hyper[attrib['id']]['bias'] = False
         is_hyper[attrib['id']]['url'] = attrib['url']
+    savePickle(is_hyper, 'article-ground-truth')
     return is_hyper
 
 if __name__=='__main__':
@@ -84,5 +85,5 @@ if __name__=='__main__':
     else:
         is_article = False
     validateXMLFiles()
-    # print(getGroundTruth())
+    getGroundTruth()
     parseTrainingData()
