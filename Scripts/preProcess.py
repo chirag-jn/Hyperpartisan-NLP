@@ -2,6 +2,7 @@ from defaults import *
 import xmlschema
 import xml.etree.ElementTree as ET
 from optparse import OptionParser
+import html
 
 is_article = False
 
@@ -42,21 +43,25 @@ def parseTrainingData():
     if is_article:
         tree = ET.parse(article_training_data_loc)
         root = tree.getroot()
-        xmlstr = ET.tostring(root)
+        # xmlstr = ET.tostring(root)
+        # xmlstr = cleantext(xmlstr)
         # print(xmlstr)
-        xmlstr = cleantext(xmlstr)
-        # xmlstr = xmlstr.lower()
-        print(xmlstr)
-        root = ET.fromstring(xmlstr)
+        # root = ET.fromstring(xmlstr)
     else:
         tree = ET.parse(publisher_training_data_loc)
+        root = tree.getroot()
     # root = tree.getroot()
     # print(root.tag)
     # print(root.attrib)
     for child in root:
         print(child.tag, child.attrib)
+        print(type(child))
+        print(dir(child))
         for i in child:
             print(i.text)
+            for j in i:
+                print(j.text)
+            break
         # print(len(child))
         break
 

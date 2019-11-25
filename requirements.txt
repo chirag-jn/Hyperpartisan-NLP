@@ -1,2 +1,4 @@
 pickle
 xmlschema
+torch
+pytorch-pretrained-bert

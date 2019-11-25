@@ -21,4 +21,4 @@ publisher_training_data_loc = 'Data/addName.xml'
 publisher_ground_truth_data_loc = 'Data/addName.xml'
 training_data_schema = 'Data/article.xsd'
 ground_truth_schema = 'Data/ground-truth.xsd'
-
+train_text_tsv = 'Data/train.text.tsv'
