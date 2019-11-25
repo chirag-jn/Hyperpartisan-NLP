@@ -42,7 +42,6 @@ def get_segments_ids(tokens):
 def get_tensors(indexed_tokens,segments_ids):
     tokens_tensor = torch.tensor([indexed_tokens])
     segments_tensors = torch.tensor([segments_ids])
-    
     return tokens_tensor, segments_tensors
 
 def arrTokenize(arr):
@@ -53,15 +52,21 @@ def arrTokenize(arr):
         # TODO: Remove break
         break
 
-def get_vectors(model,tokens_tensor,segments_tensors):
+def get_vectors():
     # Convert the hidden state embeddings into single token vectors
 
     # Holds the list of 12 layer embeddings for each token
     # Will have the shape: [# tokens, # layers, # features]
-    with torch.no_grad():
-        encoded_layers, _ = model(tokens_tensor, segments_tensors)   
     token_embeddings = [] 
     # For the 5th token in our sentence, select its feature values from layer 5.
+    token_i = 5
+    layer_i = 5
+    vec = encoded_layers[layer_i][batch_i][token_i]
+    
+    # Plot the values as a histogram to show their distribution.
+    plt.figure(figsize=(10,10))
+    plt.hist(vec, bins=200)
+    plt.show()
 
     # For each token in the sentence...
     for token_i in range(len(tokenized_text)):
@@ -82,7 +87,6 @@ def get_vectors(model,tokens_tensor,segments_tensors):
     # Sanity check the dimensions:
     print ("Number of tokens in sequence:", len(token_embeddings))
     print ("Number of layers per token:", len(token_embeddings[0])) 
-    sentence_embedding = torch.mean(encoded_layers[11], 1)
 
 def sentTokenize(sent):
     global bert_tokenizer
@@ -102,13 +106,10 @@ if __name__=='__main__':
     maxSentences = options.maxsentences
     openTextConvert()
 
-
     # Load pre-trained model (weights)
     model = BertModel.from_pretrained(bert_model)
 
     # Put the model in "evaluation" mode, meaning feed-forward operation.
     model.eval()    
-
-
-
+    
     # tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
